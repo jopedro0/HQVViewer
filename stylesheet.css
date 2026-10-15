@@ -1,0 +1,382 @@
+/* =========================
+   CONFIGURAÇÕES GERAIS
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --background: #111111;
+    --panel: #d8d8d8;
+    --card: #352d2e;
+    --text: #292526;
+    --text-light: #f5f2f2;
+    --muted: #666060;
+    --radius-panel: 36px;
+    --radius-card: 12px;
+}
+
+html {
+    min-height: 100%;
+    background: var(--background);
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 32px;
+
+    background: var(--background);
+    color: var(--text);
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =========================
+   PAINEL PRINCIPAL
+========================= */
+
+.library {
+    width: 100%;
+    max-width: 1500px;
+    min-height: calc(100vh - 64px);
+
+    margin: 0 auto;
+    padding: 40px;
+
+    background: var(--panel);
+    border-radius: var(--radius-panel);
+}
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.library-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    margin-bottom: 36px;
+}
+
+.header-text h1 {
+    margin: 0 0 8px;
+
+    color: var(--text);
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.header-text p {
+    margin: 0;
+
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.book-count {
+    flex-shrink: 0;
+
+    padding: 10px 16px;
+
+    color: var(--text-light);
+    background: var(--card);
+    border-radius: 999px;
+
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* =========================
+   GRADE DE LIVROS
+========================= */
+
+.book-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    column-gap: clamp(20px, 5vw, 80px);
+    row-gap: 32px;
+
+    align-items: start;
+}
+
+/* =========================
+   CARD DO LIVRO
+========================= */
+
+.book-card {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+/* Capa */
+
+.book-cover {
+    display: block;
+    position: relative;
+
+    width: 100%;
+    aspect-ratio: 2 / 3;
+
+    overflow: hidden;
+
+    background: var(--card);
+    border-radius: var(--radius-card);
+
+    text-decoration: none;
+
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.book-cover img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    transition: transform 250ms ease;
+}
+
+/* Estado para capas que ainda não existem */
+
+.book-cover img:not([src]),
+.book-cover img[src=""] {
+    display: none;
+}
+
+/* Título clicável */
+
+.book-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+
+    width: 100%;
+    min-height: 48px;
+
+    margin-top: 0;
+    padding: 10px 14px;
+
+    color: var(--text-light);
+    background: var(--card);
+
+    border-radius: 7px;
+
+    font-size: clamp(0.8rem, 1.1vw, 1rem);
+    font-weight: 500;
+    line-height: 1.35;
+
+    text-decoration: none;
+
+    overflow-wrap: anywhere;
+
+    transition:
+        background 180ms ease,
+        color 180ms ease;
+}
+
+.book-title span:first-child {
+    min-width: 0;
+}
+
+.arrow {
+    flex-shrink: 0;
+
+    font-size: 1.2rem;
+
+    transition: transform 180ms ease;
+}
+
+/* =========================
+   INTERAÇÕES
+========================= */
+
+@media (hover: hover) {
+    .book-cover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px rgb(0 0 0 / 15%);
+    }
+
+    .book-cover:hover img {
+        transform: scale(1.035);
+    }
+
+    .book-title:hover {
+        background: #4a3e40;
+    }
+
+    .book-title:hover .arrow {
+        transform: translateX(3px);
+    }
+}
+
+.book-cover:focus-visible,
+.book-title:focus-visible {
+    outline: 3px solid #655354;
+    outline-offset: 4px;
+}
+
+/* =========================
+   RODAPÉ
+========================= */
+
+.library-footer {
+    margin-top: 48px;
+    padding-top: 20px;
+
+    border-top: 1px solid rgb(0 0 0 / 12%);
+}
+
+.library-footer p {
+    margin: 0;
+
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+/* =========================
+   TABLETS
+========================= */
+
+@media (max-width: 1000px) {
+    body {
+        padding: 24px;
+    }
+
+    .library {
+        min-height: calc(100vh - 48px);
+        padding: 32px;
+        border-radius: 28px;
+    }
+
+    .book-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        column-gap: 28px;
+        row-gap: 28px;
+    }
+
+    .library-header {
+        margin-bottom: 28px;
+    }
+}
+
+/* =========================
+   CELULARES
+========================= */
+
+@media (max-width: 600px) {
+    body {
+        padding: 12px;
+    }
+
+    .library {
+        min-height: calc(100vh - 24px);
+
+        padding: 22px 16px;
+
+        border-radius: 22px;
+    }
+
+    .library-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+
+        margin-bottom: 24px;
+    }
+
+    .header-text h1 {
+        font-size: 1.7rem;
+        letter-spacing: -0.6px;
+    }
+
+    .header-text p {
+        font-size: 0.9rem;
+    }
+
+    .book-count {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+
+    .book-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        column-gap: 16px;
+        row-gap: 24px;
+    }
+
+    .book-cover {
+        border-radius: 9px 9px 0 0;
+    }
+
+    .book-title {
+        min-height: 44px;
+        padding: 9px 10px;
+
+        font-size: 0.82rem;
+        border-radius: 0 0 9px 9px;
+    }
+
+    .arrow {
+        font-size: 1rem;
+    }
+
+    .library-footer {
+        margin-top: 32px;
+    }
+}
+
+/* =========================
+   CELULARES ESTREITOS
+========================= */
+
+@media (max-width: 350px) {
+    body {
+        padding: 8px;
+    }
+
+    .library {
+        padding: 18px 12px;
+        border-radius: 18px;
+    }
+
+    .book-grid {
+        column-gap: 12px;
+        row-gap: 20px;
+    }
+
+    .book-title {
+        padding: 8px;
+        font-size: 0.75rem;
+    }
+}
+
+/* =========================
+   MOVIMENTO REDUZIDO
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}

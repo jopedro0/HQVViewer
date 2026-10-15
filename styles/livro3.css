@@ -1,0 +1,178 @@
+/* ==========================
+   CONFIGURAÇÕES GERAIS
+========================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    scroll-behavior: smooth;
+
+    /* Encaixe vertical entre páginas */
+    scroll-snap-type: y proximity;
+
+    /* Evita ajustes inesperados de largura */
+    overflow-x: clip;
+
+    /* Evita que a barra do navegador cubra o conteúdo */
+    scroll-padding-top: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+
+    background-color: #121212;
+    color: #eaeaea;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ==========================
+   CONTAINER DE LEITURA
+========================== */
+
+.manga-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 0;
+}
+
+/* ==========================
+   PÁGINAS DOS QUADRINHOS
+========================== */
+
+.page {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+}
+
+/* ==========================
+   IMAGENS DAS PÁGINAS
+========================== */
+
+.manga-page {
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+
+    margin: 0;
+    padding: 0;
+
+    object-fit: contain;
+    object-position: center top;
+
+    /* Evita espaços entre imagens */
+    vertical-align: middle;
+
+    /* Melhora a renderização em alguns navegadores */
+    image-rendering: auto;
+}
+
+/* ==========================
+   NÚMERO DA PÁGINA
+========================== */
+
+.page p {
+    width: 100%;
+    margin: 0;
+    padding: 8px 0 12px;
+
+    color: #888;
+    background-color: #121212;
+
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: center;
+}
+
+/* ==========================
+   CELULARES
+========================== */
+
+@media (max-width: 600px) {
+    html {
+        scroll-snap-type: y proximity;
+    }
+
+    .manga-container {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .page {
+        width: 100%;
+        min-height: 0;
+        min-height: auto;
+
+        justify-content: flex-start;
+    }
+
+    .manga-page {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .page p {
+        padding: 6px 0 10px;
+        font-size: 11px;
+    }
+}
+
+/* ==========================
+   TELAS GRANDES
+========================== */
+
+@media (min-width: 901px) {
+    .manga-container {
+        max-width: 900px;
+    }
+
+    .manga-page {
+        width: 100%;
+    }
+}
+
+/* ==========================
+   ACESSIBILIDADE
+========================== */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
